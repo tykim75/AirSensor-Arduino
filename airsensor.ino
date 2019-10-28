@@ -24,6 +24,7 @@ Adafruit_BME280 Bme; // I2C
 
 unsigned int _temp = 0;
 unsigned int _humid = 0;
+unsigned int _pressure = 0; //단위 파스칼(핵토파스칼사용시 100나눔)
 unsigned int _pm2 = 0;
 unsigned int _pm10 = 0;
 
@@ -211,6 +212,7 @@ void read_dust() {
 void read_bme() {
   _temp = Bme.readTemperature();
   _humid = Bme.readHumidity();
+  _pressure = Bme.readPressure(); //단위 파스칼
   
 #ifdef DEBUG
   Serial.print(F("Temperature: "));
@@ -237,8 +239,8 @@ void send_data() {
   digitalWrite(LED_BUILTIN, HIGH); // 서버 연결성공시 led 켜짐
   
 
-  char *paramTpl = "{\"name\":\"%s\",\"temp\":%d,\"humid\":%d,\"pm25\":%d,\"pm10\":%d}";
-  char *headerTpl = "POST /air HTTP/1.1\r\n"
+  const char *paramTpl = "{\"name\":\"%s\",\"temp\":%d,\"humid\":%d,\"pm25\":%d,\"pm10\":%d,\"pressure\":%d}";
+  const char *headerTpl = "POST /air HTTP/1.1\r\n"
                     "Host: %s\r\n"
                     "x-api-key: %s\r\n"
                     "Content-Length: %d\r\n"
@@ -250,7 +252,7 @@ void send_data() {
   char header[220];
  
   
-  sprintf(param, paramTpl, SENSOR_NAME, _temp, _humid, _pm2, _pm10);
+  sprintf(param, paramTpl, SENSOR_NAME, _temp, _humid, _pm2, _pm10, _pressure);
  
   sprintf(header, headerTpl, HOST_NAME, API_KEY, strlen(param), param);
   

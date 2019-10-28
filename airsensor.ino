@@ -248,8 +248,8 @@ void send_data() {
                     "%s"
                     ;
 
-  char param[80];
-  char header[220];
+  char param[100];
+  char header[250];
  
   
   sprintf(param, paramTpl, SENSOR_NAME, _temp, _humid, _pm2, _pm10, _pressure);

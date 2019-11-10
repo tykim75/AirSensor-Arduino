@@ -4,9 +4,9 @@
 #include <PMS.h>
 #include <Adafruit_BME280_KMU.h>
 
-#define SSID        "__________"  // wifi ssid
-#define PASSWORD    "__________"  // wifi password
-#define SENSOR_NAME "AirSensor________" /*AirSensor<<학번>>*/
+#define SSID        "SK_WiFiEE39"  // wifi ssid
+#define PASSWORD    "1501000493"  // wifi password
+#define SENSOR_NAME "AirSensor20160729" /*AirSensor<<학번>>*/
 #define HOST_NAME   "athome.cs.kookmin.ac.kr"
 #define HOST_PORT   (80)
 #define API_KEY     "C4vRjtdTA76YhuUTgBQIX8lcTC4vja7R2hLJd0Bi"
